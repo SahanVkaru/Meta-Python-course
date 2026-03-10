@@ -1,4 +1,3 @@
-
 import heapq
 
 def uniform_cost_search(graph, start, goal):
@@ -6,6 +5,7 @@ def uniform_cost_search(graph, start, goal):
     visited = set()
     parent = {start: None}
     cost = {start: 0}
+    
     while pq:
         curr_cost, node = heapq.heappop(pq)
         if node == goal:
@@ -14,6 +14,7 @@ def uniform_cost_search(graph, start, goal):
                 path.append(node)
                 node = parent[node]
             return path[::-1]
+        
         if node not in visited:
             visited.add(node)
             for neighbor, weight in graph[node]:
@@ -25,12 +26,12 @@ def uniform_cost_search(graph, start, goal):
     return None
 
 weighted_graph = {
-    'A': [('B', 2), ('C', 5)],
-    'B': [('A', 2), ('D', 3), ('E', 1)],
-    'C': [('A', 5), ('F', 4)],
-    'D': [('B', 3)],
-    'E': [('B', 1), ('G', 6)],
-    'F': [('C', 4)],
+    'A': [('B',1), ('C',3)],
+    'B': [('D',1), ('E',5)],
+    'C': [('F',2)],
+    'D': [],
+    'E': [('G',1)],
+    'F': [],
     'G': []
 }
 

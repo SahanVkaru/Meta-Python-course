@@ -1,10 +1,13 @@
 def depth_limited_dfs(graph, start, goal, limit, path=None):
     if path is None:
         path = [start]
+    
     if start == goal:
         return path
+    
     if limit <= 0:
         return None
+    
     for neighbor in graph[start]:
         if neighbor not in path:
             result = depth_limited_dfs(
@@ -18,13 +21,21 @@ def depth_limited_dfs(graph, start, goal, limit, path=None):
                 return result
     return None
 
+def iterative_deepening_dfs(graph, start, goal, max_depth):
+    for depth in range(max_depth + 1):
+        result = depth_limited_dfs(graph, start, goal, depth)
+        if result:
+            return result
+    return None
+
 graph = {
- 'A': ['B', 'C'],
- 'B': ['D', 'E'],
- 'C': ['F'],
- 'D': [],
- 'E': ['G'],
- 'F': [],
- 'G': []
+    'A': ['B', 'C'],
+    'B': ['D', 'E'],
+    'C': ['F'],
+    'D': [],
+    'E': ['G'],
+    'F': [],
+    'G': []
 }
-print("Depth Limited DFS:", depth_limited_dfs(graph, 'A', 'G', 3))
+
+print("IDDFS Path:", iterative_deepening_dfs(graph, 'A', 'G', 5))
